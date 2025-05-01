@@ -185,6 +185,7 @@ nav a:hover {
     color: var(--color-text);
     font-size: 1rem;
     font-style: italic;
+    font-weight: 600;
 }
 
 .campos-entrada {
