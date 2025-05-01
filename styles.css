@@ -74,3 +74,270 @@ nav a {
 nav a:hover {
     color: var(--color-accent);
 }
+
+.main {
+    flex: 1;
+    padding: 2rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.calculadora {
+    background: var(--color-paper);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid var(--color-border);
+    width: 100%;
+    max-width: 800px;
+    box-shadow: var(--shadow-vintage);
+    position: relative;
+    overflow: hidden;
+}
+
+.calculadora::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--color-border),
+        var(--color-border) 15px,
+        transparent 15px,
+        transparent 30px
+    );
+}
+
+.calculadora h2 {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 1rem;
+}
+
+.resolver {
+    margin-bottom: 1.5rem;
+}
+
+.resolver label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.resolver-opciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.resolver-opciones button {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    background: var(--color-background);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-vintage);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 3px 3px 0 var(--color-border);
+}
+
+.resolver-opciones button:hover {
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0 var(--color-border);
+}
+
+.resolver-opciones button.active {
+    background: var(--color-primary);
+    color: var(--color-paper);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
+}
+
+.ecuacion-display {
+    background: var(--color-background);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--color-border);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.ecuacion {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-family: 'Times New Roman', serif;
+}
+
+.ecuacion .v { color: var(--color-primary); font-weight: bold; }
+.ecuacion .d { color: var(--color-secondary); font-weight: bold; }
+.ecuacion .t { color: var(--color-accent); font-weight: bold; }
+
+.leyenda-ecuacion {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    font-style: italic;
+}
+
+.campos-entrada {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.campos-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.campos-grupo label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-contenedor {
+    display: flex;
+}
+
+.input-contenedor input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid var(--color-border);
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    font-family: var(--font-vintage);
+    font-size: 1rem;
+    background: var(--color-background);
+    color: var(--color-text);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-contenedor input:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+}
+
+.input-contenedor select {
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: 0 5px 5px 0;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-vintage);
+    font-size: 1rem;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238B4513'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.25rem;
+}
+
+.resultado {
+    background: var(--color-background);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--color-border);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow-vintage);
+    animation: slideIn 0.3s ease-out;
+}
+
+.result-valor {
+    display: none;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.resultado h3 {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.resultado-valor {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    font-family: 'Times New Roman', serif;
+    margin: 1rem 0;
+}
+
+.resultado-ecuacion {
+    font-style: italic;
+    color: var(--color-text);
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.limpiar-boton {
+    padding: 0.75rem 1.5rem;
+    background: var(--color-background);
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    color: var(--color-text);
+    cursor: pointer;
+    font-family: var(--font-vintage);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 3px 3px 0 var(--color-border);
+    transition: all 0.3s;
+}
+
+.limpiar-boton:hover {
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0 var(--color-border);
+}
+
+.limpiar-boton:active {
+    transform: translateY(2px);
+    box-shadow: 1px 1px 0 var(--color-border);
+}
