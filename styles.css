@@ -100,22 +100,6 @@ nav a:hover {
     overflow: hidden;
 }
 
-.calculadora::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: repeating-linear-gradient(
-        90deg,
-        var(--color-border),
-        var(--color-border) 15px,
-        transparent 15px,
-        transparent 30px
-    );
-}
-
 .calculadora h2 {
     font-size: 1.8rem;
     color: var(--color-primary);
@@ -198,8 +182,8 @@ nav a:hover {
 .ecuacion .t { color: var(--color-accent); font-weight: bold; }
 
 .leyenda-ecuacion {
-    font-size: 0.9rem;
     color: var(--color-text);
+    font-size: 1rem;
     font-style: italic;
 }
 
