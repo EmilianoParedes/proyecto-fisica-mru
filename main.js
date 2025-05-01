@@ -128,9 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
             str = partes[0];
         }
 
-        // Detectar si hay un punto decimal
-        const tieneDecimal = str.includes(".");
-
         // Eliminar punto decimal para contar dígitos
         str = str.replace(".", "");
 
