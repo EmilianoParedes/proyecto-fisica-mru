@@ -17,28 +17,28 @@
 }
 
 body {
-    font-family: var(--font-vintage);
+    min-height: 100vh;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
     color: var(--color-text);
     background: var(--color-background);
     background-size: 20px 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    font-family: var(--font-vintage);
 }
 
 .header {
-    background: var(--color-primary);
     padding: 1rem 1.5rem;
-    border-bottom: 3px solid var(--color-border);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid var(--color-border);
+    background: var(--color-primary);
 }
 
 .header-content {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;
     align-items: center;
 }
 
