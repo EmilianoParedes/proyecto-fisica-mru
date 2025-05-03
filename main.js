@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Seleccionar elementos del DOM
+    // ========== CÓDIGO PARA CALCULADORA DE VELOCIDAD, DESPLAZAMIENTO Y TIEMPO ==========
+    
+    // Seleccionar elementos del DOM para la primera calculadora
     const resolverBotones = document.querySelectorAll(
-        ".resolver-opciones button"
+        ".calculadora:first-child .resolver-opciones button"
     );
-    const ecuacionSpan = document.querySelector(".ecuacion");
-    const leyendaEcuacion = document.querySelector(".leyenda-ecuacion");
-    const camposGrupo = document.querySelectorAll(".campos-grupo");
+    const ecuacionSpan = document.querySelector(".calculadora:first-child .ecuacion");
+    const leyendaEcuacion = document.querySelector(".calculadora:first-child .leyenda-ecuacion");
+    const camposGrupo = document.querySelectorAll(".calculadora:first-child .campos-grupo");
 
     // Función para actualizar la ecuación según el botón seleccionado
     function actualizarEcuacion(tipoCalculo) {
@@ -100,15 +102,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Inicializar con el primer botón (velocidad) como activo
-    actualizarEcuacion("velocidad");
-    actualizarCamposVisibles("velocidad");
+    const primerBoton = resolverBotones[0];
+    if (primerBoton) {
+        primerBoton.classList.add("active");
+        actualizarEcuacion("velocidad");
+        actualizarCamposVisibles("velocidad");
+    }
 
-    // Implementar la lógica de cálculo (esto puede expandirse según necesidades)
+    // Implementar la lógica de cálculo
     const calcularBoton = document.getElementById("limpiar");
-    const inputs = document.querySelectorAll(".campos-grupo input");
-    const resultadoNumero = document.querySelector(".resultado-numero");
-    const resultadoUnidad = document.querySelector(".resultado-unidad");
-    const resultadoEcuacion = document.getElementById("resultado-ecuacion");
+    const inputs = document.querySelectorAll(".calculadora:first-child .campos-grupo input");
+    const resultadoNumero = document.querySelector(".calculadora:first-child .resultado-numero");
+    const resultadoUnidad = document.querySelector(".calculadora:first-child .resultado-unidad");
 
     // Función para contar cifras significativas
     function contarCifrasSignificativas(numero) {
@@ -148,38 +153,21 @@ document.addEventListener("DOMContentLoaded", function () {
         return Math.min(cifrasValor1, cifrasValor2);
     }
 
-    // Función para formatear el resultado según cifras significativas, con comas decimales
+    // Ajustar el formateo del resultado para respetar estrictamente las cifras significativas
     function formatearResultado(resultado, cifrasSignificativas) {
-        if (cifrasSignificativas <= 0)
+        if (cifrasSignificativas <= 0) {
             return resultado.toString().replace(".", ",");
-
-        // Para números enteros como 60, 700, necesitamos determinar si mostrar decimales
-        let decimalesNecesarios = 0;
-
-        if (resultado >= 1) {
-            // Para números enteros o mayores que 1
-            const potencia = Math.floor(Math.log10(Math.abs(resultado))) + 1;
-
-            // Si el número tiene menos dígitos que las cifras significativas necesarias,
-            // necesitamos añadir decimales
-            if (potencia < cifrasSignificativas) {
-                decimalesNecesarios = cifrasSignificativas - potencia;
-            }
-        } else {
-            // Para números menores que 1
-            // Contar ceros después del punto decimal
-            const strNum = resultado.toString();
-            const match = strNum.match(/0\.0*/);
-            const cerosDespuesDelPunto = match ? match[0].length - 2 : 0;
-
-            decimalesNecesarios = cerosDespuesDelPunto + cifrasSignificativas;
         }
 
-        // Formatear el resultado con los decimales necesarios
-        const resultadoFormateado = resultado.toFixed(decimalesNecesarios);
+        // Redondear el número a las cifras significativas
+        const factor = Math.pow(10, cifrasSignificativas - Math.ceil(Math.log10(Math.abs(resultado))));
+        const resultadoRedondeado = Math.round(resultado * factor) / factor;
 
-        // Reemplazar punto decimal por coma para formato español
-        return resultadoFormateado.replace(".", ",");
+        // Convertir a string y reemplazar el punto decimal por una coma
+        return resultadoRedondeado.toLocaleString("es-ES", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: cifrasSignificativas - 1
+        }).replace(".", ",");
     }
 
     // Función para convertir unidades de velocidad
@@ -195,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Modificar la lógica de cálculo para incluir la conversión de unidades y corregir cifras significativas
     function calcular() {
         const tipoCalculo = document
-            .querySelector(".resolver-opciones button.active")
+            .querySelector(".calculadora:first-child .resolver-opciones button.active")
             .getAttribute("data-solve");
 
         let valores = {
@@ -285,7 +273,6 @@ document.addEventListener("DOMContentLoaded", function () {
             determinarCifrasSignificativas(valores.desplazamiento, valores.tiempo)
         );
         resultadoUnidad.textContent = unidad;
-        resultadoEcuacion.textContent = ecuacion;
     }
 
     // Añadir event listeners para calcular cuando se cambien los inputs
@@ -294,15 +281,258 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Añadir event listener para el botón de limpiar
-    calcularBoton.addEventListener("click", function () {
-        // Limpiar los inputs
-        inputs.forEach((input) => {
-            input.value = "";
+    if (calcularBoton) {
+        calcularBoton.addEventListener("click", function () {
+            // Limpiar los inputs
+            inputs.forEach((input) => {
+                input.value = "";
+            });
+
+            // Limpiar el resultado
+            resultadoNumero.textContent = "";
+            resultadoUnidad.textContent = "";
+        });
+    }
+
+    // ========== CÓDIGO PARA PROBLEMAS DE ENCUENTRO ==========
+    
+    // Seleccionar elementos del DOM para problemas de encuentro
+    const encuentroBotones = document.querySelectorAll(".calculadora:nth-child(2) .resolver-opciones button");
+    const entradaDistanciaSeparacion = document.getElementById("distancia-separacion");
+    const unidadesDistancia = document.getElementById("unidades-distancia");
+    const posInicial1 = document.getElementById("pos-inicial-1");
+    const posInicial2 = document.getElementById("pos-inicial-2");
+    const velocidad1 = document.getElementById("velocidad-1");
+    const velocidad2 = document.getElementById("velocidad-2");
+    const unidadesPos1 = document.getElementById("unidades-pos-1");
+    const unidadesPos2 = document.getElementById("unidades-pos-2");
+    const unidadesVel1 = document.getElementById("unidades-vel-1");
+    const unidadesVel2 = document.getElementById("unidades-vel-2");
+    const tiempoEncuentro = document.getElementById("tiempo-encuentro");
+    const posicionEncuentro = document.getElementById("posicion-encuentro");
+    const resultadoEncuentroNumero = document.querySelector("#resultado-encuentro .resultado-numero");
+    const resultadoEncuentroUnidad = document.querySelector("#resultado-encuentro .resultado-unidad");
+    const limpiarEncuentroBtn = document.getElementById("limpiar-encuentro");
+
+    // Variables para seguir el tipo de cálculo actual
+    let tipoCalculoEncuentro = "tiempo-encuentro"; // Por defecto
+
+    // Función para convertir unidades de velocidad (para problemas de encuentro)
+    function convertirVelocidadEncuentro(valor, unidadOrigen, unidadDestino) {
+        if (unidadOrigen === "Km/h" && unidadDestino === "m/s") {
+            return valor * (1000 / 3600); // km/h a m/s
+        } else if (unidadOrigen === "m/s" && unidadDestino === "Km/h") {
+            return valor * (3600 / 1000); // m/s a km/h
+        }
+        return valor; // Misma unidad, no hay conversión
+    }
+
+    // Función para convertir unidades de distancia
+    function convertirDistancia(valor, unidadOrigen, unidadDestino) {
+        if (unidadOrigen === "Km" && unidadDestino === "m") {
+            return valor * 1000; // km a m
+        } else if (unidadOrigen === "m" && unidadDestino === "Km") {
+            return valor / 1000; // m a km
+        }
+        return valor; // Misma unidad, no hay conversión
+    }
+
+    // Función para convertir unidades de tiempo
+    function convertirTiempo(valor, unidadOrigen, unidadDestino) {
+        if (unidadOrigen === "s" && unidadDestino === "min") {
+            return valor / 60; // segundos a minutos
+        } else if (unidadOrigen === "s" && unidadDestino === "h") {
+            return valor / 3600; // segundos a horas
+        } else if (unidadOrigen === "min" && unidadDestino === "s") {
+            return valor * 60; // minutos a segundos
+        } else if (unidadOrigen === "min" && unidadDestino === "h") {
+            return valor / 60; // minutos a horas
+        } else if (unidadOrigen === "h" && unidadDestino === "s") {
+            return valor * 3600; // horas a segundos
+        } else if (unidadOrigen === "h" && unidadDestino === "min") {
+            return valor * 60; // horas a minutos
+        }
+        return valor; // Misma unidad, no hay conversión
+    }
+
+    // Función para determinar las cifras significativas
+    function determinarCifrasSignificativasEncuentro(valores) {
+        // Convertir cada valor a string y contar dígitos significativos
+        const cifras = valores
+            .filter(valor => valor !== 0 && !isNaN(valor)) 
+            .map(valor => {
+                const str = valor.toString();
+
+                // Manejar formato decimal y eliminar ceros no significativos
+                let digitos = str.replace(/^0+|\.|\-/g, '');
+
+                // Si el número tiene un punto decimal, contar solo los dígitos significativos
+                if (str.includes('.')) {
+                    const [entero, decimal] = str.split('.');
+                    digitos = entero.replace(/^0+/, '') + decimal;
+                }
+
+                return digitos.length;
+            });
+
+        // Retornar el mínimo número de cifras significativas
+        return cifras.length > 0 ? Math.min(...cifras) : 2;
+    }
+
+    // Modificar la lógica de cálculo para problemas de encuentro
+    function calcularEncuentro() {
+        // Obtener valores de entrada
+        const distanciaSeparacion = parseFloat(entradaDistanciaSeparacion.value) || 0;
+        const posIni1 = parseFloat(posInicial1.value) || 0;
+        const posIni2 = parseFloat(posInicial2.value) || 0;
+        const vel1 = parseFloat(velocidad1.value) || 0;
+        const vel2 = parseFloat(velocidad2.value) || 0;
+
+        // Obtener unidades seleccionadas
+        const unidadDist = unidadesDistancia.value;
+        const unidadPos1 = unidadesPos1.value;
+        const unidadPos2 = unidadesPos2.value;
+        const unidadVel1 = unidadesVel1.value;
+        const unidadVel2 = unidadesVel2.value;
+
+        // Convertir todo a unidades base (m, m/s)
+        const distanciaSeparacionBase = convertirDistancia(distanciaSeparacion, unidadDist, "m");
+        const posIni1Base = convertirDistancia(posIni1, unidadPos1, "m");
+        const posIni2Base = convertirDistancia(posIni2, unidadPos2, "m");
+        const vel1Base = convertirVelocidadEncuentro(vel1, unidadVel1, "m/s");
+        const vel2Base = convertirVelocidadEncuentro(vel2, unidadVel2, "m/s");
+
+        // Calcular la distancia real entre los objetos
+        let distanciaReal = Math.abs(posIni2Base - posIni1Base);
+
+        // Si se proporcionó distancia de separación, usarla en lugar de la calculada
+        if (distanciaSeparacion > 0) {
+            distanciaReal = distanciaSeparacionBase;
+        }
+
+        // Determinar si los cuerpos se mueven en sentidos opuestos
+        const sentidosOpuestos = vel1Base * vel2Base < 0; // Velocidades con signos opuestos
+
+        // Calcular la velocidad relativa
+        const velocidadRelativa = sentidosOpuestos
+            ? Math.abs(vel1Base) + Math.abs(vel2Base) // Velocidades se suman si son opuestas
+            : Math.abs(vel1Base - vel2Base); // Velocidades se restan si son en el mismo sentido
+
+        // Verificar si es posible el encuentro
+        let esEncuentroPosible = true;
+        if (!sentidosOpuestos && ((vel1Base > 0 && vel2Base > 0 && vel1Base <= vel2Base) ||
+            (vel1Base < 0 && vel2Base < 0 && vel1Base >= vel2Base))) {
+            esEncuentroPosible = false;
+        }
+
+        // Calcular tiempo y posición de encuentro
+        let tiempoDeEncuentro = 0;
+        let posicionDeEncuentro = 0;
+
+        if (esEncuentroPosible && velocidadRelativa !== 0) {
+            tiempoDeEncuentro = distanciaReal / velocidadRelativa;
+
+            // Calcular posición de encuentro para el cuerpo 1
+            posicionDeEncuentro = posIni1Base + vel1Base * tiempoDeEncuentro;
+        }
+
+        console.log("Datos de entrada:", {
+            distanciaSeparacionBase,
+            posIni1Base,
+            posIni2Base,
+            vel1Base,
+            vel2Base,
+            distanciaReal,
+            velocidadRelativa,
+            sentidosOpuestos
         });
 
-        // Limpiar el resultado
-        resultadoNumero.textContent = "";
-        resultadoUnidad.textContent = "";
-        resultadoEcuacion.textContent = "";
+        console.log("Resultados calculados:", {
+            tiempoDeEncuentro,
+            posicionDeEncuentro,
+            esEncuentroPosible
+        });
+
+        // Ajustar el formateo del resultado para respetar las cifras significativas
+        const cifrasSignificativas = determinarCifrasSignificativasEncuentro([distanciaReal, vel1Base, vel2Base]);
+
+        // Actualizar los resultados en el div principal de "resultado"
+        if (esEncuentroPosible) {
+            const tiempoFormateado = tiempoDeEncuentro.toFixed(2); // Formatear con dos decimales
+            const posicionFormateada = posicionDeEncuentro.toFixed(2); // Formatear con dos decimales
+
+            if (tipoCalculoEncuentro === "tiempo-encuentro") {
+                resultadoEncuentroNumero.textContent = tiempoFormateado;
+                resultadoEncuentroUnidad.textContent = "s";
+
+                tiempoEncuentro.textContent = `${tiempoFormateado} s`;
+                posicionEncuentro.textContent = `${posicionFormateada} m`;
+            } else if (tipoCalculoEncuentro === "punto-encuentro") {
+                resultadoEncuentroNumero.textContent = posicionFormateada;
+                resultadoEncuentroUnidad.textContent = "m";
+
+                tiempoEncuentro.textContent = `${tiempoFormateado} s`;
+                posicionEncuentro.textContent = `${posicionFormateada} m`;
+            }
+        } else {
+            resultadoEncuentroNumero.textContent = "No hay";
+            resultadoEncuentroUnidad.textContent = "encuentro";
+
+            tiempoEncuentro.textContent = "No hay encuentro";
+            posicionEncuentro.textContent = "No hay encuentro";
+        }
+    }
+
+    // Añadir event listeners para los botones de tipo de cálculo
+    if (encuentroBotones.length > 0) {
+        encuentroBotones.forEach(boton => {
+            boton.addEventListener("click", function() {
+                // Quitar clase active de todos los botones
+                encuentroBotones.forEach(b => b.classList.remove("active"));
+                // Agregar clase active al botón seleccionado
+                this.classList.add("active");
+                // Guardar el tipo de cálculo
+                tipoCalculoEncuentro = this.getAttribute("data-solve");
+                // Recalcular con el nuevo tipo
+                calcularEncuentro();
+            });
+        });
+
+        // Establecer el primer botón como activo por defecto
+        encuentroBotones[0].classList.add("active");
+    }
+
+    // Añadir event listeners para los campos de entrada de encuentro
+    const camposEncuentro = [entradaDistanciaSeparacion, posInicial1, posInicial2, velocidad1, velocidad2];
+    camposEncuentro.forEach(input => {
+        if (input) {
+            input.addEventListener("input", calcularEncuentro);
+        }
     });
+
+    // Añadir event listeners para los selectores de unidades de encuentro
+    const selectoresEncuentro = [unidadesDistancia, unidadesPos1, unidadesPos2, unidadesVel1, unidadesVel2];
+    selectoresEncuentro.forEach(select => {
+        if (select) {
+            select.addEventListener("change", calcularEncuentro);
+        }
+    });
+
+    // Añadir event listener para el botón de limpiar encuentro
+    if (limpiarEncuentroBtn) {
+        limpiarEncuentroBtn.addEventListener("click", function() {
+            // Limpiar todos los campos de entrada
+            if (entradaDistanciaSeparacion) entradaDistanciaSeparacion.value = "";
+            if (posInicial1) posInicial1.value = "";
+            if (posInicial2) posInicial2.value = "";
+            if (velocidad1) velocidad1.value = "";
+            if (velocidad2) velocidad2.value = "";
+            
+            // Limpiar resultados
+            if (resultadoEncuentroNumero) resultadoEncuentroNumero.textContent = "";
+            if (resultadoEncuentroUnidad) resultadoEncuentroUnidad.textContent = "";
+            if (tiempoEncuentro) tiempoEncuentro.textContent = "";
+            if (posicionEncuentro) posicionEncuentro.textContent = "";
+        });
+    }
 });
