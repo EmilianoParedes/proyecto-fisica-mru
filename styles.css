@@ -326,3 +326,72 @@ nav a:hover {
     transform: translateY(2px);
     box-shadow: 1px 1px 0 var(--color-border);
 }
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .main {
+        padding: 1rem;
+    }
+
+    .calculadora {
+        padding: 1rem;
+    }
+
+    .resolver-opciones {
+        grid-template-columns: 1fr;
+    }
+
+    .campos-entrada {
+        gap: 1rem;
+    }
+
+    .actions {
+        justify-content: center;
+    }
+}
+
+/* Para celulares */
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .calculadora h2 {
+        font-size: 1.5rem;
+    }
+
+    .ecuacion {
+        font-size: 1.2rem;
+    }
+
+    .resolver-opciones button {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .input-contenedor input, .input-contenedor select {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .resultado-valor {
+        font-size: 1.5rem;
+    }
+
+    .limpiar-boton {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
