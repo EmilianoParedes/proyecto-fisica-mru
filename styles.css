@@ -115,6 +115,16 @@ nav a:hover {
     margin-bottom: 1.5rem;
 }
 
+.resolver-encuentro label {
+    display: block;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .resolver label {
     display: block;
     font-weight: bold;
@@ -325,6 +335,30 @@ nav a:hover {
     transform: translateY(2px);
     box-shadow: 1px 1px 0 var(--color-border);
 }
+
+.calculadora-encuentro {
+        background: var(--color-paper);
+        padding: 2rem;
+        border-radius: 15px;
+        border: 3px solid var(--color-border);
+        width: 100%;
+        max-width: 800px;
+        box-shadow: var(--shadow-vintage);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .calculadora-encuentro h2 {
+        font-size: 1.8rem;
+        color: var(--color-primary);
+        margin-bottom: 1.5rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-bottom: 2px solid var(--color-border);
+        padding-bottom: 1rem;
+    }
+
 
 /* Media Queries */
 
