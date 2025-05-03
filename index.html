@@ -128,6 +128,114 @@
                 <button id="limpiar" class="limpiar-boton">Limpiar</button>
             </div>
         </div>
+
+        <!-- Problemas de encuentro -->
+
+        <div class="calculadora">
+            <h2>Problemas de Encuentros</h2>
+            <div class="resolver">
+                <label>Resolver:</label>
+                <div class="resolver-opciones">
+                    <button data-solve="tiempo-encuentro" class="active">Tiempo de Encuentro</button>
+                    <button data-solve="punto-encuentro">Punto de Encuentro</button>
+                </div>
+            </div>
+
+            <div class="campos-entrada">
+                <h3>Objeto 1</h3>
+                <div class="campos-grupo">
+                    <label>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"></path>
+                            <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"></path>
+                            <path d="M12 3v6"></path>
+                        </svg>
+                        Posición Inicial:
+                    </label>
+                    <div class="input-contenedor">
+                        <input type="number" id="pos-inicial-1" required>
+                        <select id="unidades-pos-1">
+                            <option value="m">m</option>
+                            <option value="Km">Km</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="campos-grupo">
+                    <label>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m12 14 4-4"></path>
+                            <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+                        </svg>
+                        Velocidad:
+                    </label>
+                    <div class="input-contenedor">
+                        <input type="number" id="velocidad-1" required>
+                        <select id="unidades-vel-1">
+                            <option value="m/s">m/s</option>
+                            <option value="Km/h">km/h</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h3>Objeto 2</h3>
+                <div class="campos-grupo">
+                    <label>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"></path>
+                            <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"></path>
+                            <path d="M12 3v6"></path>
+                        </svg>
+                        Posición Inicial:
+                    </label>
+                    <div class="input-contenedor">
+                        <input type="number" id="pos-inicial-2" required>
+                        <select id="unidades-pos-2">
+                            <option value="m">m</option>
+                            <option value="Km">Km</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="campos-grupo">
+                    <label>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m12 14 4-4"></path>
+                            <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+                        </svg>
+                        Velocidad:
+                    </label>
+                    <div class="input-contenedor">
+                        <input type="number" id="velocidad-2" required>
+                        <select id="unidades-vel-2">
+                            <option value="m/s">m/s</option>
+                            <option value="Km/h">km/h</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resultado" id="resultado-encuentro">
+                <h3>Resultado</h3>
+                <div class="resultado-valor">
+                    <span class="resultado-numero"></span>
+                    <span class="resultado-unidad"></span>
+                </div>
+                <p id="resultado-ecuacion-encuentro"></p>
+                <div class="resultado-adicional">
+                    <p><strong>Tiempo de encuentro:</strong> <span id="tiempo-encuentro"></span></p>
+                    <p><strong>Posición de encuentro:</strong> <span id="posicion-encuentro"></span></p>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="limpiar-encuentro" class="limpiar-boton">Limpiar</button>
+            </div>
+        </div>
     </main>
 
     <footer></footer>
