@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     // ========== CÓDIGO PARA CALCULADORA DE VELOCIDAD, DESPLAZAMIENTO Y TIEMPO ==========
-    
+
     // Seleccionar elementos del DOM para la primera calculadora
     const resolverBotones = document.querySelectorAll(
-        ".calculadora:first-child .resolver-opciones button"
+        ".calculadora .resolver-opciones button"
     );
-    const ecuacionSpan = document.querySelector(".calculadora:first-child .ecuacion");
-    const leyendaEcuacion = document.querySelector(".calculadora:first-child .leyenda-ecuacion");
-    const camposGrupo = document.querySelectorAll(".calculadora:first-child .campos-grupo");
+    const ecuacionSpan = document.querySelector(".calculadora .ecuacion");
+    const leyendaEcuacion = document.querySelector(".calculadora .leyenda-ecuacion");
+    const camposGrupo = document.querySelectorAll(".calculadora .campos-grupo");
 
     // Función para actualizar la ecuación según el botón seleccionado
     function actualizarEcuacion(tipoCalculo) {
@@ -111,9 +111,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Implementar la lógica de cálculo
     const calcularBoton = document.getElementById("limpiar");
-    const inputs = document.querySelectorAll(".calculadora:first-child .campos-grupo input");
-    const resultadoNumero = document.querySelector(".calculadora:first-child .resultado-numero");
-    const resultadoUnidad = document.querySelector(".calculadora:first-child .resultado-unidad");
+    const inputs = document.querySelectorAll(".calculadora .campos-grupo input");
+    const resultadoNumero = document.querySelector(".calculadora .resultado-numero");
+    const resultadoUnidad = document.querySelector(".calculadora .resultado-unidad");
 
     // Función para contar cifras significativas
     function contarCifrasSignificativas(numero) {
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Modificar la lógica de cálculo para incluir la conversión de unidades y corregir cifras significativas
     function calcular() {
         const tipoCalculo = document
-            .querySelector(".calculadora:first-child .resolver-opciones button.active")
+            .querySelector(".calculadora .resolver-opciones button.active")
             .getAttribute("data-solve");
 
         let valores = {
@@ -295,9 +295,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ========== CÓDIGO PARA PROBLEMAS DE ENCUENTRO ==========
-    
+
     // Seleccionar elementos del DOM para problemas de encuentro
-    const encuentroBotones = document.querySelectorAll(".calculadora:nth-child(2) .resolver-opciones button");
+    const encuentroBotones = document.querySelectorAll(".calculadora-encuentro .resolver-opciones button");
     const entradaDistanciaSeparacion = document.getElementById("distancia-separacion");
     const unidadesDistancia = document.getElementById("unidades-distancia");
     const posInicial1 = document.getElementById("pos-inicial-1");
@@ -355,30 +355,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return valor; // Misma unidad, no hay conversión
     }
 
-    // Función para determinar las cifras significativas
-    function determinarCifrasSignificativasEncuentro(valores) {
-        // Convertir cada valor a string y contar dígitos significativos
-        const cifras = valores
-            .filter(valor => valor !== 0 && !isNaN(valor)) 
-            .map(valor => {
-                const str = valor.toString();
-
-                // Manejar formato decimal y eliminar ceros no significativos
-                let digitos = str.replace(/^0+|\.|\-/g, '');
-
-                // Si el número tiene un punto decimal, contar solo los dígitos significativos
-                if (str.includes('.')) {
-                    const [entero, decimal] = str.split('.');
-                    digitos = entero.replace(/^0+/, '') + decimal;
-                }
-
-                return digitos.length;
-            });
-
-        // Retornar el mínimo número de cifras significativas
-        return cifras.length > 0 ? Math.min(...cifras) : 2;
-    }
-
     // Modificar la lógica de cálculo para problemas de encuentro
     function calcularEncuentro() {
         // Obtener valores de entrada
@@ -388,40 +364,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const vel1 = parseFloat(velocidad1.value) || 0;
         const vel2 = parseFloat(velocidad2.value) || 0;
 
-        // Obtener unidades seleccionadas
-        const unidadDist = unidadesDistancia.value;
-        const unidadPos1 = unidadesPos1.value;
-        const unidadPos2 = unidadesPos2.value;
-        const unidadVel1 = unidadesVel1.value;
-        const unidadVel2 = unidadesVel2.value;
-
-        // Convertir todo a unidades base (m, m/s)
-        const distanciaSeparacionBase = convertirDistancia(distanciaSeparacion, unidadDist, "m");
-        const posIni1Base = convertirDistancia(posIni1, unidadPos1, "m");
-        const posIni2Base = convertirDistancia(posIni2, unidadPos2, "m");
-        const vel1Base = convertirVelocidadEncuentro(vel1, unidadVel1, "m/s");
-        const vel2Base = convertirVelocidadEncuentro(vel2, unidadVel2, "m/s");
-
         // Calcular la distancia real entre los objetos
-        let distanciaReal = Math.abs(posIni2Base - posIni1Base);
+        let distanciaReal = Math.abs(posIni2 - posIni1);
 
         // Si se proporcionó distancia de separación, usarla en lugar de la calculada
         if (distanciaSeparacion > 0) {
-            distanciaReal = distanciaSeparacionBase;
+            distanciaReal = distanciaSeparacion;
         }
 
         // Determinar si los cuerpos se mueven en sentidos opuestos
-        const sentidosOpuestos = vel1Base * vel2Base < 0; // Velocidades con signos opuestos
+        const sentidosOpuestos = vel1 * vel2 < 0; // Velocidades con signos opuestos
 
         // Calcular la velocidad relativa
         const velocidadRelativa = sentidosOpuestos
-            ? Math.abs(vel1Base) + Math.abs(vel2Base) // Velocidades se suman si son opuestas
-            : Math.abs(vel1Base - vel2Base); // Velocidades se restan si son en el mismo sentido
+            ? Math.abs(vel1) + Math.abs(vel2) // Velocidades se suman si son opuestas
+            : Math.abs(vel1 - vel2); // Velocidades se restan si son en el mismo sentido
 
         // Verificar si es posible el encuentro
         let esEncuentroPosible = true;
-        if (!sentidosOpuestos && ((vel1Base > 0 && vel2Base > 0 && vel1Base <= vel2Base) ||
-            (vel1Base < 0 && vel2Base < 0 && vel1Base >= vel2Base))) {
+        if (!sentidosOpuestos && ((vel1 > 0 && vel2 > 0 && vel1 <= vel2) ||
+            (vel1 < 0 && vel2 < 0 && vel1 >= vel2))) {
             esEncuentroPosible = false;
         }
 
@@ -429,64 +391,34 @@ document.addEventListener("DOMContentLoaded", function () {
         let tiempoDeEncuentro = 0;
         let posicionDeEncuentro = 0;
 
+        // Calcular posición de encuentro considerando ambas posiciones iniciales y velocidades
         if (esEncuentroPosible && velocidadRelativa !== 0) {
             tiempoDeEncuentro = distanciaReal / velocidadRelativa;
 
             // Calcular posición de encuentro para el cuerpo 1
-            posicionDeEncuentro = posIni1Base + vel1Base * tiempoDeEncuentro;
+            posicionDeEncuentro = posIni1 + vel1 * tiempoDeEncuentro;
+
+            // Verificar si el cálculo considera correctamente las posiciones iniciales
+            console.log("Tiempo de Encuentro:", tiempoDeEncuentro);
+            console.log("Posición Inicial Cuerpo 1:", posIni1);
+            console.log("Velocidad Cuerpo 1:", vel1);
+            console.log("Posición de Encuentro Calculada:", posicionDeEncuentro);
         }
 
-        console.log("Datos de entrada:", {
-            distanciaSeparacionBase,
-            posIni1Base,
-            posIni2Base,
-            vel1Base,
-            vel2Base,
-            distanciaReal,
-            velocidadRelativa,
-            sentidosOpuestos
-        });
+        // Agregar mensajes de depuración para verificar cálculos
+        console.log("Distancia Real:", distanciaReal);
+        console.log("Velocidad Relativa:", velocidadRelativa);
+        console.log("Tiempo de Encuentro:", tiempoDeEncuentro);
+        console.log("Posición de Encuentro:", posicionDeEncuentro);
 
-        console.log("Resultados calculados:", {
-            tiempoDeEncuentro,
-            posicionDeEncuentro,
-            esEncuentroPosible
-        });
+        // Mostrar el resultado adicional para el Punto de Encuentro con las unidades seleccionadas
 
-        // Ajustar el formateo del resultado para respetar las cifras significativas
-        const cifrasSignificativas = determinarCifrasSignificativasEncuentro([distanciaReal, vel1Base, vel2Base]);
-
-        // Actualizar los resultados en el div principal de "resultado"
-        if (esEncuentroPosible) {
-            const tiempoFormateado = tiempoDeEncuentro.toFixed(2); // Formatear con dos decimales
-            const posicionFormateada = posicionDeEncuentro.toFixed(2); // Formatear con dos decimales
-
-            if (tipoCalculoEncuentro === "tiempo-encuentro") {
-                resultadoEncuentroNumero.textContent = tiempoFormateado;
-                resultadoEncuentroUnidad.textContent = "s";
-
-                tiempoEncuentro.textContent = `${tiempoFormateado} s`;
-                posicionEncuentro.textContent = `${posicionFormateada} m`;
-            } else if (tipoCalculoEncuentro === "punto-encuentro") {
-                resultadoEncuentroNumero.textContent = posicionFormateada;
-                resultadoEncuentroUnidad.textContent = "m";
-
-                tiempoEncuentro.textContent = `${tiempoFormateado} s`;
-                posicionEncuentro.textContent = `${posicionFormateada} m`;
-            }
-        } else {
-            resultadoEncuentroNumero.textContent = "No hay";
-            resultadoEncuentroUnidad.textContent = "encuentro";
-
-            tiempoEncuentro.textContent = "No hay encuentro";
-            posicionEncuentro.textContent = "No hay encuentro";
-        }
     }
 
     // Añadir event listeners para los botones de tipo de cálculo
     if (encuentroBotones.length > 0) {
         encuentroBotones.forEach(boton => {
-            boton.addEventListener("click", function() {
+            boton.addEventListener("click", function () {
                 // Quitar clase active de todos los botones
                 encuentroBotones.forEach(b => b.classList.remove("active"));
                 // Agregar clase active al botón seleccionado
@@ -520,14 +452,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Añadir event listener para el botón de limpiar encuentro
     if (limpiarEncuentroBtn) {
-        limpiarEncuentroBtn.addEventListener("click", function() {
+        limpiarEncuentroBtn.addEventListener("click", function () {
             // Limpiar todos los campos de entrada
             if (entradaDistanciaSeparacion) entradaDistanciaSeparacion.value = "";
             if (posInicial1) posInicial1.value = "";
             if (posInicial2) posInicial2.value = "";
             if (velocidad1) velocidad1.value = "";
             if (velocidad2) velocidad2.value = "";
-            
+
             // Limpiar resultados
             if (resultadoEncuentroNumero) resultadoEncuentroNumero.textContent = "";
             if (resultadoEncuentroUnidad) resultadoEncuentroUnidad.textContent = "";
@@ -535,4 +467,27 @@ document.addEventListener("DOMContentLoaded", function () {
             if (posicionEncuentro) posicionEncuentro.textContent = "";
         });
     }
+
+    // Añadir event listeners para los botones de "Tiempo de Encuentro" y "Punto de Encuentro"
+    const botonesEncuentro = document.querySelectorAll(".resolver-encuentro .resolver-opciones button");
+
+    botonesEncuentro.forEach((boton) => {
+        boton.addEventListener("click", function () {
+            // Quitar la clase 'active' de todos los botones
+            botonesEncuentro.forEach((b) => b.classList.remove("active"));
+
+            // Añadir la clase 'active' al botón seleccionado
+            this.classList.add("active");
+
+            // Actualizar el tipo de cálculo según el botón seleccionado
+            const tipoCalculo = this.getAttribute("data-solve");
+            if (tipoCalculo === "tiempo-encuentro") {
+                // Lógica para mostrar campos o resultados relacionados con "Tiempo de Encuentro"
+                console.log("Seleccionado: Tiempo de Encuentro");
+            } else if (tipoCalculo === "punto-encuentro") {
+                // Lógica para mostrar campos o resultados relacionados con "Punto de Encuentro"
+                console.log("Seleccionado: Punto de Encuentro");
+            }
+        });
+    });
 });
