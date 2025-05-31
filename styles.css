@@ -194,9 +194,20 @@ nav a:hover {
     font-family: 'Times New Roman', serif;
 }
 
-.ecuacion .v { color: var(--color-primary); font-weight: bold; }
-.ecuacion .d { color: var(--color-secondary); font-weight: bold; }
-.ecuacion .t { color: var(--color-accent); font-weight: bold; }
+.ecuacion .v {
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+.ecuacion .d {
+    color: var(--color-secondary);
+    font-weight: bold;
+}
+
+.ecuacion .t {
+    color: var(--color-accent);
+    font-weight: bold;
+}
 
 .leyenda-ecuacion {
     color: var(--color-text);
@@ -285,6 +296,7 @@ nav a:hover {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -344,41 +356,41 @@ nav a:hover {
 }
 
 .calculadora-encuentro {
-        background: var(--color-paper);
-        padding: 2rem;
-        padding-bottom: 5px;
-        border-radius: 15px;
-        border: 3px solid var(--color-border);
-        width: 100%;
-        max-width: 800px;
-        box-shadow: var(--shadow-vintage);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .calculadora-encuentro h2 {
-        font-size: 1.8rem;
-        color: var(--color-primary);
-        margin-bottom: 1.5rem;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        border-bottom: 2px solid var(--color-border);
-        padding-bottom: 1rem;
-    }
+    background: var(--color-paper);
+    padding: 2rem;
+    padding-bottom: 5px;
+    border-radius: 15px;
+    border: 3px solid var(--color-border);
+    width: 100%;
+    max-width: 800px;
+    box-shadow: var(--shadow-vintage);
+    position: relative;
+    overflow: hidden;
+}
 
-    .descripción-encuentro {
-        background: var(--color-background);
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 1.5rem;
-        border: 1px solid var(--color-border);
-    }
+.calculadora-encuentro h2 {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 1rem;
+}
 
-    .descripción-encuentro ul {
-        margin-left: 1.5rem;
-        margin-bottom: 0.5rem;
-    }
+.descripción-encuentro {
+    background: var(--color-background);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--color-border);
+}
+
+.descripción-encuentro ul {
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
 
 
 /* Media Queries */
@@ -435,7 +447,8 @@ nav a:hover {
         font-size: 0.9rem;
     }
 
-    .input-contenedor input, .input-contenedor select {
+    .input-contenedor input,
+    .input-contenedor select {
         padding: 0.5rem;
         font-size: 0.9rem;
     }
