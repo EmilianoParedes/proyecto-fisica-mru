@@ -39,12 +39,12 @@
             <h2>Movimiento Rectilíneo Uniforme</h2>
             <!-- Calculadora Velocidad - Desplazamiento - Tiempo -->
             <div class="resolver">
-                <label>Resolver:</label>
-                <div class="resolver-opciones">
+                <fieldset id="resolver-opciones" class="resolver-opciones" aria-label="Opciones de resolución">
+                    <legend>Resolver:</legend>
                     <button data-solve="velocidad" class="active">Velocidad</button>
                     <button data-solve="desplazamiento">Desplazamiento</button>
                     <button data-solve="tiempo">Tiempo</button>
-                </div>
+                </fieldset>
             </div>
 
             <div class="ecuacion-display">
@@ -64,8 +64,7 @@
             </div>
 
             <div class="campos-entrada">
-                <div class="campos-grupo">
-                    <label>
+                <div class="campos-grupo">                    <label for="desplazamiento-input">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14"></path>
@@ -74,7 +73,7 @@
                         Desplazamiento:
                     </label>
                     <div class="input-contenedor">
-                        <input type="number" required>
+                        <input type="number" id="desplazamiento-input" required>
                         <select id="unidades-desplazamiento">
                             <option value="m">m</option>
                             <option value="Km">Km</option>
@@ -82,8 +81,7 @@
                     </div>
                 </div>
 
-                <div class="campos-grupo">
-                    <label>
+                <div class="campos-grupo">                    <label for="velocidad-input">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m12 14 4-4"></path>
@@ -92,7 +90,7 @@
                         Velocidad:
                     </label>
                     <div class="input-contenedor">
-                        <input type="number" required>
+                        <input type="number" id="velocidad-input" required>
                         <select id="unidades-velocidad">
                             <option value="m/s">m/s</option>
                             <option value="Km/h">km/h</option>
@@ -100,8 +98,7 @@
                     </div>
                 </div>
 
-                <div class="campos-grupo">
-                    <label>
+                <div class="campos-grupo">                    <label for="tiempo-input">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -110,7 +107,7 @@
                         Tiempo:
                     </label>
                     <div class="input-contenedor">
-                        <input type="number" required>
+                        <input type="number" id="tiempo-input" required>
                         <select id="unidades-tiempo">
                             <option value="s">s</option>
                             <option value="min">min</option>
@@ -134,7 +131,6 @@
         </div>
 
         <!-- Problemas de encuentro -->
-
         <div class="calculadora-encuentro">
             <h2>Problemas de Encuentros</h2>
             <div class="descripción-encuentro">
@@ -150,17 +146,17 @@
                 <p><strong>Asegúrate de ingresar las velocidades correctamente según el caso.</strong></p>
             </div>
             <div class="resolver-encuentro">
-                <label class="resolver-label">Resolver:</label>
-                <div class="resolver-opciones">
+                <fieldset id="resolver-encuentro-opciones" class="resolver-opciones" aria-label="Opciones de resolución de encuentro">
+                    <legend>Resolver:</legend>
                     <button data-solve="tiempo-encuentro" class="active">Tiempo de Encuentro</button>
                     <button data-solve="punto-encuentro">Punto de Encuentro</button>
-                </div>
+                </fieldset>
             </div>
 
             <div class="campos-entrada">
                 <!-- Campo para la distancia de separación -->
                 <div class="campos-grupo">
-                    <label>
+                    <label for="distancia-separacion">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14"></path>
@@ -180,7 +176,7 @@
                 <div class="campos-entrada">
                     <h3>Cuerpo 1</h3>
                     <div class="campos-grupo">
-                        <label>
+                        <label for="pos-inicial-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -200,7 +196,7 @@
                     </div>
 
                     <div class="campos-grupo">
-                        <label>
+                        <label for="velocidad-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -220,7 +216,7 @@
 
                     <h3>Cuerpo 2</h3>
                     <div class="campos-grupo">
-                        <label>
+                        <label for="pos-inicial-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -240,7 +236,7 @@
                     </div>
 
                     <div class="campos-grupo">
-                        <label>
+                        <label for="velocidad-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
