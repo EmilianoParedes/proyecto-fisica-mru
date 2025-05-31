@@ -14,6 +14,7 @@ export function initMRUCalculator() {
   const resultadoUnidad = document.querySelector('.calculadora .resultado-unidad');
   const limpiarButton = document.getElementById('limpiar');
   const ecuacionDisplay = document.querySelector('.ecuacion');
+  const leyendaEcuacion = document.querySelector('.leyenda-ecuacion');
   const camposGrupo = document.querySelectorAll('.calculadora .campos-grupo');
 
   // Add IDs to inputs for better identification
@@ -35,6 +36,7 @@ export function initMRUCalculator() {
           <span> / </span>
           <span class="t">Δt</span>
         `;
+        leyendaEcuacion.innerHTML = 'Donde <span class="v">V</span> es la velocidad, <span class="d">Δx</span> es el desplazamiento, y <span class="t">Δt</span> es el tiempo';
         break;
       case 'desplazamiento':
         ecuacionDisplay.innerHTML = `
@@ -44,6 +46,7 @@ export function initMRUCalculator() {
           <span> × </span>
           <span class="t">Δt</span>
         `;
+        leyendaEcuacion.innerHTML = 'Donde <span class="d">Δx</span> es el desplazamiento, <span class="v">V</span> es la velocidad, y <span class="t">Δt</span> es el tiempo';
         break;
       case 'tiempo':
         ecuacionDisplay.innerHTML = `
@@ -53,6 +56,7 @@ export function initMRUCalculator() {
           <span> / </span>
           <span class="v">V</span>
         `;
+        leyendaEcuacion.innerHTML = 'Donde <span class="t">Δt</span> es el tiempo, <span class="d">Δx</span> es el desplazamiento, y <span class="v">V</span> es la velocidad';
         break;
     }
   }
