@@ -355,6 +355,10 @@ nav a:hover {
     box-shadow: 1px 1px 0 var(--color-border);
 }
 
+fieldset {
+    border: none;
+}
+
 .calculadora-encuentro {
     background: var(--color-paper);
     padding: 2rem;
