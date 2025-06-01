@@ -22,10 +22,9 @@ export function initMRUCalculator() {
   const leyendaEcuacion = document.querySelector('.leyenda-ecuacion');
   const camposGrupo = document.querySelectorAll('.calculadora .campos-grupo');
 
-  // Current solve mode
   let currentSolveMode = 'velocidad';
 
-  // Update equation display based on solve mode
+  // Actualizar la ecuación y texto según el modo de resolución
   function updateEquation(solveMode) {
     switch (solveMode) {
       case 'velocidad':
@@ -61,7 +60,7 @@ export function initMRUCalculator() {
     }
   }
 
-  // Update calculator UI based on solve mode
+  // Actualizar la interfaz de usuario de la calculadora según el modo de resolución seleccionado
   function updateCalculatorUI(solveMode) {
     currentSolveMode = solveMode;
     
@@ -74,10 +73,10 @@ export function initMRUCalculator() {
       }
     });
 
-    // Update equation display
+    // Actualizar la ecuación y leyenda
     updateEquation(solveMode);
 
-    // Show/hide input fields based on solve mode
+    // Mostrar/ocultar campos de entrada según el modo de resolución
     camposGrupo.forEach(grupo => {
       const input = grupo.querySelector('input');
       const label = grupo.querySelector('label').textContent.toLowerCase();
@@ -93,7 +92,7 @@ export function initMRUCalculator() {
       }
     });
 
-    // Clear result
+    // Limpiar los campos de entrada
     resultadoDiv.style.display = 'none';
   }
 
