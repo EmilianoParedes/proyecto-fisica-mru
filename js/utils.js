@@ -1,142 +1,79 @@
+/**
+ * Utility functions for MRU calculations
+ */
+
+// Convert values to base units (m, s, m/s)
 export function convertToBaseUnit(value, unit, type) {
-  if (value === null || isNaN(value)) return null;
+  if (!value) return null;
   
   switch (type) {
     case 'distance':
-      // Convert to meters
-      switch (unit) {
-        case 'm': return value;
-        case 'Km': return value * 1000;
-        default: return value;
-      }
-      
+      return unit === 'Km' ? value * 1000 : value; // Convert km to m
     case 'velocity':
-      // Convert to m/s
-      switch (unit) {
-        case 'm/s': return value;
-        case 'Km/h': return value * (1000 / 3600); // km/h to m/s
-        default: return value;
-      }
-      
+      return unit === 'Km/h' ? value / 3.6 : value; // Convert km/h to m/s
     case 'time':
-      // Convert to seconds
-      switch (unit) {
-        case 's': return value;
-        case 'min': return value * 60;
-        case 'horas': return value * 3600;
-        default: return value;
-      }
-      
+      if (unit === 'min') return value * 60; // Convert min to s
+      if (unit === 'horas') return value * 3600; // Convert hours to s
+      return value;
     default:
       return value;
   }
 }
 
-/**
- * Converts a value from base unit to a specific unit
- * @param {number} value - The value in base units
- * @param {string} unit - The target unit
- * @param {string} type - The type of measurement ('distance', 'velocity', 'time')
- * @returns {number} - The converted value
- */
+// Convert from base units to selected units
 export function convertFromBaseUnit(value, unit, type) {
-  if (value === null || isNaN(value)) return null;
+  if (!value) return null;
   
   switch (type) {
     case 'distance':
-      // Convert from meters
-      switch (unit) {
-        case 'm': return value;
-        case 'Km': return value / 1000;
-        default: return value;
-      }
-      
+      return unit === 'Km' ? value / 1000 : value; // Convert m to km
     case 'velocity':
-      // Convert from m/s
-      switch (unit) {
-        case 'm/s': return value;
-        case 'Km/h': return value * (3600 / 1000); // m/s to km/h
-        default: return value;
-      }
-      
+      return unit === 'Km/h' ? value * 3.6 : value; // Convert m/s to km/h
     case 'time':
-      // Convert from seconds
-      switch (unit) {
-        case 's': return value;
-        case 'min': return value / 60;
-        case 'horas': return value / 3600;
-        default: return value;
-      }
-      
+      if (unit === 'min') return value / 60; // Convert s to min
+      if (unit === 'horas') return value / 3600; // Convert s to hours
+      return value;
     default:
       return value;
   }
 }
 
-/**
- * Rounds a number to a specific number of significant digits
- * @param {number} num - The number to round
- * @param {number} sigDigits - The number of significant digits
- * @returns {number} - The rounded number
- */
+// Function to round to significant digits
 export function roundToSignificantDigits(num, sigDigits) {
   if (num === 0) return 0;
   
-  const magnitude = Math.floor(Math.log10(Math.abs(num))) + 1;
-  const factor = Math.pow(10, sigDigits - magnitude);
+  const d = Math.ceil(Math.log10(num < 0 ? -num : num));
+  const power = sigDigits - d;
   
-  return Math.round(num * factor) / factor;
+  const magnitude = Math.pow(10, power);
+  const shifted = Math.round(num * magnitude);
+  
+  return shifted / magnitude;
 }
 
-/**
- * Validates that all required inputs are filled
- * @param {Array<HTMLInputElement>} inputs - Array of input elements
- * @returns {boolean} - True if all inputs are valid
- */
-export function validateInputs(inputs) {
-  let valid = true;
+// Get number of significant digits in a value
+export function getSignificantDigits(value) {
+  if (value === 0) return 1;
   
-  inputs.forEach(input => {
-    if (!input.value.trim()) {
-      input.classList.add('error');
-      valid = false;
-    } else {
-      input.classList.remove('error');
-    }
-  });
+  // Convert to string and remove leading/trailing zeros
+  const strValue = String(value).replace(/^0+|\.0+$|(?:(\.\d*[1-9])0+)$/g, '$1');
   
-  return valid;
+  // Count digits, ignoring decimal point
+  return strValue.replace(/[^0-9]/g, '').length;
 }
 
-/**
- * Adds error styling to an element
- * @param {HTMLElement} element - The element to style
- * @param {string} message - Error message to display
- */
-export function showError(element, message) {
-  element.classList.add('error');
+// Get the minimum number of significant digits from a set of values
+export function getMinSignificantDigits(...values) {
+  const filtered = values.filter(v => v !== null && v !== undefined && !isNaN(v));
+  if (filtered.length === 0) return 2; // Default
   
-  // Create error message if it doesn't exist
-  let errorMsg = element.parentNode.querySelector('.error-message');
-  if (!errorMsg) {
-    errorMsg = document.createElement('div');
-    errorMsg.className = 'error-message';
-    element.parentNode.appendChild(errorMsg);
-  }
-  
-  errorMsg.textContent = message;
+  return Math.min(...filtered.map(getSignificantDigits));
 }
 
-/**
- * Removes error styling from an element
- * @param {HTMLElement} element - The element to remove styling from
- */
-export function clearError(element) {
-  element.classList.remove('error');
+// Format number with commas instead of periods for decimal separator
+export function formatNumber(num, sigDigits) {
+  if (num === null || num === undefined || isNaN(num)) return '';
   
-  // Remove error message if it exists
-  const errorMsg = element.parentNode.querySelector('.error-message');
-  if (errorMsg) {
-    errorMsg.remove();
-  }
+  const rounded = roundToSignificantDigits(num, sigDigits);
+  return String(rounded).replace('.', ',');
 }

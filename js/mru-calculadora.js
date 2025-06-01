@@ -1,26 +1,26 @@
-import { convertToBaseUnit, convertFromBaseUnit, roundToSignificantDigits } from './utils.js';
+/**
+ * Calculadora de Movimiento Rectilíneo Uniforme (MRU)
+ */
+
+import { convertToBaseUnit, convertFromBaseUnit, roundToSignificantDigits, getMinSignificantDigits, formatNumber } from './utils.js';
 
 // Initialize the MRU Calculator
 export function initMRUCalculator() {
   // Get reference to DOM elements
   const solveButtons = document.querySelectorAll('.calculadora .resolver-opciones button');
-  const desplazamientoInput = document.querySelector('.calculadora .campos-grupo:nth-child(1) input');
+  const desplazamientoInput = document.getElementById('desplazamiento-input');
   const desplazamientoUnits = document.getElementById('unidades-desplazamiento');
-  const velocidadInput = document.querySelector('.calculadora .campos-grupo:nth-child(2) input');
+  const velocidadInput = document.getElementById('velocidad-input');
   const velocidadUnits = document.getElementById('unidades-velocidad');
-  const tiempoInput = document.querySelector('.calculadora .campos-grupo:nth-child(3) input');
+  const tiempoInput = document.getElementById('tiempo-input');
   const tiempoUnits = document.getElementById('unidades-tiempo');
-  const resultadoNumero = document.querySelector('.calculadora .resultado-numero');
-  const resultadoUnidad = document.querySelector('.calculadora .resultado-unidad');
+  const resultadoDiv = document.getElementById('resultado');
+  const resultadoNumero = document.querySelector('.resultado-numero');
+  const resultadoUnidad = document.querySelector('.resultado-unidad');
   const limpiarButton = document.getElementById('limpiar');
   const ecuacionDisplay = document.querySelector('.ecuacion');
   const leyendaEcuacion = document.querySelector('.leyenda-ecuacion');
   const camposGrupo = document.querySelectorAll('.calculadora .campos-grupo');
-
-  // Add IDs to inputs for better identification
-  desplazamientoInput.id = 'desplazamiento-input';
-  velocidadInput.id = 'velocidad-input';
-  tiempoInput.id = 'tiempo-input';
 
   // Current solve mode
   let currentSolveMode = 'velocidad';
@@ -88,17 +88,13 @@ export function initMRUCalculator() {
         (solveMode === 'tiempo' && label.includes('tiempo'))
       ) {
         grupo.style.display = 'none';
-        input.disabled = true;
-        input.value = '';
       } else {
         grupo.style.display = 'flex';
-        input.disabled = false;
       }
     });
 
     // Clear result
-    resultadoNumero.textContent = '';
-    resultadoUnidad.textContent = '';
+    resultadoDiv.style.display = 'none';
   }
 
   // Calculate the result based on inputs and solve mode
@@ -129,7 +125,6 @@ export function initMRUCalculator() {
         if (desplazamientoBase !== null && tiempoBase !== null && tiempoBase !== 0) {
           result = desplazamientoBase / tiempoBase;
           resultUnit = velocidadUnit;
-          result = convertFromBaseUnit(result, resultUnit, 'velocity');
         }
         break;
 
@@ -137,7 +132,6 @@ export function initMRUCalculator() {
         if (velocidadBase !== null && tiempoBase !== null) {
           result = velocidadBase * tiempoBase;
           resultUnit = desplazamientoUnit;
-          result = convertFromBaseUnit(result, resultUnit, 'distance');
         }
         break;
 
@@ -145,25 +139,41 @@ export function initMRUCalculator() {
         if (desplazamientoBase !== null && velocidadBase !== null && velocidadBase !== 0) {
           result = desplazamientoBase / velocidadBase;
           resultUnit = tiempoUnit;
-          result = convertFromBaseUnit(result, resultUnit, 'time');
         }
         break;
     }
 
-    // Display result
-    if (result !== undefined) {
-      const roundedResult = roundToSignificantDigits(result, 4);
-      resultadoNumero.textContent = roundedResult;
+    // Display result if we have a valid calculation
+    if (result !== undefined && !isNaN(result)) {
+      // Convert from base units back to selected units
+      let displayResult;
+      
+      switch (currentSolveMode) {
+        case 'velocidad':
+          displayResult = convertFromBaseUnit(result, resultUnit, 'velocity');
+          break;
+        case 'desplazamiento':
+          displayResult = convertFromBaseUnit(result, resultUnit, 'distance');
+          break;
+        case 'tiempo':
+          displayResult = convertFromBaseUnit(result, resultUnit, 'time');
+          break;
+      }
+      
+      // Get minimum significant digits from inputs
+      const sigDigits = getMinSignificantDigits(desplazamiento, velocidad, tiempo);
+      
+      // Format the result
+      resultadoNumero.textContent = formatNumber(displayResult, sigDigits);
       resultadoUnidad.textContent = resultUnit;
+      resultadoDiv.style.display = 'block';
 
       // Add animation
-      const resultadoElem = document.getElementById('resultado');
-      resultadoElem.style.animation = 'none';
-      void resultadoElem.offsetWidth;
-      resultadoElem.style.animation = 'slideIn 0.3s ease-out';
+      resultadoDiv.style.animation = 'none';
+      void resultadoDiv.offsetWidth;
+      resultadoDiv.style.animation = 'slideIn 0.3s ease-out';
     } else {
-      resultadoNumero.textContent = '';
-      resultadoUnidad.textContent = '';
+      resultadoDiv.style.display = 'none';
     }
   }
 
@@ -190,8 +200,6 @@ export function initMRUCalculator() {
     desplazamientoInput.value = '';
     velocidadInput.value = '';
     tiempoInput.value = '';
-    resultadoNumero.textContent = '';
-    resultadoUnidad.textContent = '';
     updateCalculatorUI(currentSolveMode);
   });
 
