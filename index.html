@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto Física - MRU</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">    
     <script type="module">
         import { initMRUCalculator } from './js/mru-calculadora.js';
+        import { initEncounterCalculator } from './js/encuentro-calculadora.js';
         document.addEventListener('DOMContentLoaded', () => {
             initMRUCalculator();
+            initEncounterCalculator();
         });
     </script>
 </head>
@@ -154,9 +156,8 @@
             </div>
 
             <div class="campos-entrada">
-                <!-- Campo para la distancia de separación -->
-                <div class="campos-grupo">
-                    <label for="distancia-separacion">
+                <!-- Campo para la distancia de separación -->                <div class="campos-grupo">
+                    <label for="encuentro-distancia">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14"></path>
@@ -165,8 +166,8 @@
                         Distancia de Separación:
                     </label>
                     <div class="input-contenedor">
-                        <input type="number" id="distancia-separacion" required>
-                        <select id="unidades-distancia">
+                        <input type="number" id="encuentro-distancia" required>
+                        <select id="encuentro-distancia-unidad">
                             <option value="m">m</option>
                             <option value="Km">Km</option>
                         </select>
@@ -175,8 +176,7 @@
 
                 <div class="campos-entrada">
                     <h3>Cuerpo 1</h3>
-                    <div class="campos-grupo">
-                        <label for="pos-inicial-1">
+                    <div class="campos-grupo">                        <label for="encuentro-xi1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -187,8 +187,8 @@
                             Xi(Posición Inicial):
                         </label>
                         <div class="input-contenedor">
-                            <input type="number" id="pos-inicial-1" required>
-                            <select id="unidades-pos-1">
+                            <input type="number" id="encuentro-xi1" required>
+                            <select id="encuentro-xi1-unidad">
                                 <option value="m">m</option>
                                 <option value="Km">Km</option>
                             </select>
@@ -196,7 +196,7 @@
                     </div>
 
                     <div class="campos-grupo">
-                        <label for="velocidad-1">
+                        <label for="encuentro-v1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -206,17 +206,16 @@
                             Velocidad:
                         </label>
                         <div class="input-contenedor">
-                            <input type="number" id="velocidad-1" required>
-                            <select id="unidades-vel-1">
+                            <input type="number" id="encuentro-v1" required>
+                            <select id="encuentro-v1-unidad">
                                 <option value="m/s">m/s</option>
                                 <option value="Km/h">km/h</option>
                             </select>
                         </div>
                     </div>
 
-                    <h3>Cuerpo 2</h3>
-                    <div class="campos-grupo">
-                        <label for="pos-inicial-2">
+                    <h3>Cuerpo 2</h3>                    <div class="campos-grupo">
+                        <label for="encuentro-xi2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -227,8 +226,8 @@
                             Xi(Posición Inicial):
                         </label>
                         <div class="input-contenedor">
-                            <input type="number" id="pos-inicial-2" required>
-                            <select id="unidades-pos-2">
+                            <input type="number" id="encuentro-xi2" required>
+                            <select id="encuentro-xi2-unidad">
                                 <option value="m">m</option>
                                 <option value="Km">Km</option>
                             </select>
@@ -236,7 +235,7 @@
                     </div>
 
                     <div class="campos-grupo">
-                        <label for="velocidad-2">
+                        <label for="encuentro-v2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -246,8 +245,8 @@
                             Velocidad:
                         </label>
                         <div class="input-contenedor">
-                            <input type="number" id="velocidad-2" required>
-                            <select id="unidades-vel-2">
+                            <input type="number" id="encuentro-v2" required>
+                            <select id="encuentro-v2-unidad">
                                 <option value="m/s">m/s</option>
                                 <option value="Km/h">km/h</option>
                             </select>
