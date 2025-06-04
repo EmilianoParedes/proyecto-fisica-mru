@@ -5,26 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto Física - MRU</title>
-    <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicons/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="./images/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./images/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./images/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./images/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./images/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./images/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./images/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./images/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./images/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./images/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicons/favicon-16x16.png">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="msapplication-TileImage" content="./images/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="styles.css">    
+    <link rel="stylesheet" href="styles.css">
     <script type="module">
-        import { initMRUCalculator } from './js/mru-calculadora.js';
-        import { initEncounterCalculator } from './js/encuentro-calculadora.js';
+        import { initMRUCalculator } from '/js/mru-calculadora.js';
+        import { initEncounterCalculator } from '/js/encuentro-calculadora.js';
         document.addEventListener('DOMContentLoaded', () => {
             initMRUCalculator();
             initEncounterCalculator();
@@ -45,8 +45,8 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="/docs/mru-teorico.pdf" download>TEORÍA</a></li>
-                    <li><a href="/docs/mru-repartido.pdf" download>EJERCICIOS</a></li>
+                    <li><a href="./docs/mru-teorico.pdf" download>TEORÍA</a></li>
+                    <li><a href="./docs/mru-repartido.pdf" download>EJERCICIOS</a></li>
                 </ul>
             </nav>
         </div>
@@ -82,7 +82,8 @@
             </div>
 
             <div class="campos-entrada">
-                <div class="campos-grupo">                    <label for="desplazamiento-input">
+                <div class="campos-grupo">
+                    <label for="desplazamiento-input">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14"></path>
@@ -99,7 +100,7 @@
                     </div>
                 </div>
 
-                <div class="campos-grupo">                    <label for="velocidad-input">
+                <div class="campos-grupo"> <label for="velocidad-input">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m12 14 4-4"></path>
@@ -116,7 +117,8 @@
                     </div>
                 </div>
 
-                <div class="campos-grupo">                    <label for="tiempo-input">
+                <div class="campos-grupo">
+                    <label for="tiempo-input">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -163,7 +165,8 @@
                 <p><strong>Asegúrate de ingresar las velocidades correctamente según el caso.</strong></p>
             </div>
             <div class="resolver-encuentro">
-                <fieldset id="resolver-encuentro-opciones" class="resolver-opciones" aria-label="Opciones de resolución de encuentro">
+                <fieldset id="resolver-encuentro-opciones" class="resolver-opciones"
+                    aria-label="Opciones de resolución de encuentro">
                     <legend>Resolver:</legend>
                     <button data-solve="tiempo-encuentro" class="active">Tiempo de Encuentro</button>
                     <button data-solve="punto-encuentro">Punto de Encuentro</button>
@@ -171,7 +174,8 @@
             </div>
 
             <div class="campos-entrada">
-                <!-- Campo para la distancia de separación -->                <div class="campos-grupo">
+                <!-- Campo para la distancia de separación -->
+                <div class="campos-grupo">
                     <label for="encuentro-distancia">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -191,7 +195,8 @@
 
                 <div class="campos-entrada">
                     <h3>Cuerpo 1</h3>
-                    <div class="campos-grupo">                        <label for="encuentro-xi1">
+                    <div class="campos-grupo">
+                        <label for="encuentro-xi1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -229,7 +234,8 @@
                         </div>
                     </div>
 
-                    <h3>Cuerpo 2</h3>                    <div class="campos-grupo">
+                    <h3>Cuerpo 2</h3>
+                    <div class="campos-grupo">
                         <label for="encuentro-xi2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
