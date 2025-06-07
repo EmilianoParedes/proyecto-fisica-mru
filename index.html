@@ -44,11 +44,9 @@
             </nav>
         </div>
     </header>
-    <!-- Sección Principal -->
     <main class="main">
         <div class="calculadora">
             <h2>Movimiento Rectilíneo Uniforme</h2>
-            <!-- Calculadora Velocidad - Desplazamiento - Tiempo -->
             <div class="resolver">
                 <fieldset id="resolver-opciones" class="resolver-opciones" aria-label="Opciones de resolución">
                     <legend>Resolver:</legend>
@@ -143,7 +141,6 @@
             </div>
         </div>
 
-        <!-- Problemas de encuentro -->
         <div class="calculadora-encuentro">
             <h2>Problemas de Encuentros</h2>
             <div class="descripción-encuentro">
@@ -163,11 +160,11 @@
                     <legend>Resolver:</legend>
                     <button data-solve="tiempo-encuentro" class="active">Tiempo de Encuentro</button>
                     <button data-solve="punto-encuentro">Punto de Encuentro</button>
+                    <button data-solve="graficar">Graficar</button>
                 </fieldset>
             </div>
 
             <div class="campos-entrada">
-                <!-- Campo para la distancia de separación -->
                 <div class="campos-grupo">
                     <label for="encuentro-distancia">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -278,6 +275,11 @@
                         <p><strong>Tiempo de encuentro:</strong> <span id="tiempo-encuentro"></span></p>
                         <p><strong>Posición de encuentro:</strong> <span id="posicion-encuentro"></span></p>
                     </div>
+                </div>
+
+                <div class="grafico-container" id="grafico-container" style="display: none;">
+                    <h3>Gráfico de Posición vs. Tiempo</h3>
+                    <canvas id="grafico-encuentro" width="700" height="400"></canvas>
                 </div>
 
                 <div class="actions">
