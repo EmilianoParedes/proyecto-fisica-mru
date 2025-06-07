@@ -396,6 +396,28 @@ fieldset {
     margin-bottom: 0.5rem;
 }
 
+.grafico-container {
+    margin-top: 2rem;
+    text-align: center;
+    animation: slideIn 0.3s ease-out;
+}
+
+.grafico-container h3 {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#grafico-encuentro {
+    background-color: #fff;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+}
+
 
 /* Media Queries */
 
@@ -445,10 +467,14 @@ fieldset {
     .ecuacion {
         font-size: 1.2rem;
     }
+    
+    .resolver-opciones {
+        grid-template-columns: repeat(3, 1fr); /* Mantener 3 columnas en móvil para los botones de encuentro */
+    }
 
     .resolver-opciones button {
         padding: 0.5rem;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 
     .input-contenedor input,
