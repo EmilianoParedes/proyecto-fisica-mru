@@ -24,6 +24,9 @@ export function initEncounterCalculator() {
   const graficoContainer = document.getElementById('grafico-container');
   const graficoCanvas = document.getElementById('grafico-encuentro');
   const ctx = graficoCanvas.getContext('2d');
+  const resultadoAdicional = document.querySelector('#resultado-encuentro .resultado-adicional');
+  const resultadoMensaje = document.querySelector('#resultado-encuentro .resultado-mensaje');
+
 
   // Calculate encounter and return data object, or null if not possible
   function getEncounterData() {
@@ -72,9 +75,21 @@ export function initEncounterCalculator() {
   // Display text results
   function displayResults(data) {
     if (!data) {
-      resultadoEncuentro.style.display = 'none';
-      return;
+        resultadoEncuentro.style.display = 'block';
+        resultadoAdicional.style.display = 'none';
+        
+        resultadoMensaje.textContent = 'Los datos ingresados no producen un encuentro futuro.';
+        resultadoMensaje.style.display = 'block';
+
+        resultadoEncuentro.style.animation = 'none';
+        void resultadoEncuentro.offsetWidth;
+        resultadoEncuentro.style.animation = 'slideIn 0.3s ease-out';
+        return;
     }
+
+    resultadoMensaje.style.display = 'none';
+    resultadoAdicional.style.display = 'block';
+
     const { tiempoEncuentro, posicionEncuentro, sigDigits, distanciaUnit, xi1Unit, xi2Unit } = data;
     let tiempoDisplay, posicionDisplay;
 
