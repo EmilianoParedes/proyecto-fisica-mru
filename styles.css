@@ -311,6 +311,14 @@ nav a:hover {
     letter-spacing: 1px;
 }
 
+.resultado-mensaje {
+    color: var(--color-secondary);
+    font-weight: bold;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    display: none;
+}
+
 .resultado-valor {
     font-size: 2rem;
     font-weight: bold;
