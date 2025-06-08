@@ -574,9 +574,13 @@ fieldset {
         font-size: 0.8rem;
     }
 
-    .input-contenedor input,
-    .input-contenedor select {
+    .input-contenedor input {
         padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .input-contenedor select {
+        padding: 0.5rem 2rem 0.5rem 0.5rem;
         font-size: 0.9rem;
     }
 
