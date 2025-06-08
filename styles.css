@@ -566,7 +566,7 @@ fieldset {
     }
     
     .resolver-opciones {
-        grid-template-columns: repeat(3, 1fr); /* Mantener 3 columnas en móvil para los botones de encuentro */
+        grid-template-columns: 1fr; /* Mantener 3 columnas en móvil para los botones de encuentro */
     }
 
     .resolver-opciones button {
