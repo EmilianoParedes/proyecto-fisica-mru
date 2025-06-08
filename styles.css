@@ -502,40 +502,56 @@ fieldset {
 }
 /* Media Queries */
 
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
+@media (min-width: 1200px) {
     .main {
-        padding: 1rem;
+        padding: 3rem 2rem;
     }
 
-    .calculadora {
-        padding: 1rem;
+    .calculadora,
+    .calculadora-encuentro {
+        padding: 3rem;
     }
 
-    .resolver-opciones {
-        grid-template-columns: 1fr;
+    .ecuacion {
+        font-size: 1.8rem;
     }
 
     .campos-entrada {
-        gap: 1rem;
-    }
-
-    .actions {
-        justify-content: center;
+        gap: 2rem;
     }
 }
 
-/* Para celulares */
+@media (min-width: 769px) and (max-width: 1199px) {
+    .main {
+        padding: 2rem;
+    }
+
+    .calculadora,
+    .calculadora-encuentro {
+        max-width: 90%;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .calculadora,
+    .calculadora-encuentro {
+        padding: 1.5rem;
+        max-width: 95%;
+    }
+
+    .resolver-opciones {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .campos-grupo label {
+        font-size: 1rem;
+    }
+
+    #grafico-encuentro {
+        max-height: 400px;
+    }
+}
+
 @media (max-width: 480px) {
     .logo h1 {
         font-size: 1.2rem;
@@ -571,5 +587,73 @@ fieldset {
     .limpiar-boton {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
+    }
+
+    .calculadora-encuentro {
+        padding: 1rem;
+    }
+
+    .calculadora-encuentro .resolver-opciones {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .descripción-encuentro {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .descripción-encuentro ul {
+        margin-left: 1rem;
+        font-size: 0.9rem;
+    }
+
+    #grafico-encuentro {
+        max-height: 300px;
+    }
+
+    .resultado {
+        padding: 1rem;
+    }
+
+    .resultado h3 {
+        font-size: 1.1rem;
+    }
+
+    .resultado-adicional {
+        font-size: 0.9rem;
+    }
+
+    .footer-section h4 {
+        font-size: 1.1rem;
+    }
+
+    .footer-section p,
+    .footer-section li {
+        font-size: 0.9rem;
+    }
+}
+
+/* Orientación landscape en celulares */
+@media (max-height: 480px) and (orientation: landscape) {
+    .header {
+        padding: 0.5rem 1rem;
+    }
+
+    .main {
+        padding: 1rem;
+    }
+
+    .calculadora,
+    .calculadora-encuentro {
+        padding: 1rem;
+    }
+
+    .ecuacion-display {
+        padding: 1rem;
+    }
+
+    #grafico-encuentro {
+        max-height: 200px;
     }
 }
