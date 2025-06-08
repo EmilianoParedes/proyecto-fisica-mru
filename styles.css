@@ -391,6 +391,10 @@ fieldset {
     padding-bottom: 1rem;
 }
 
+.calculadora-encuentro .resolver-opciones {
+    grid-template-columns: repeat(2, 1fr);
+}
+
 .descripción-encuentro {
     background: var(--color-background);
     padding: 1rem;
